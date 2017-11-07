@@ -1,27 +1,28 @@
 package pneu.controller;
 
 import javafx.fxml.Initializable;
-import pneu.model.Rack;
-import pneu.model.Slot;
-import pneu.model.Storage;
-import pneu.model.Tire;
+import pneu.model.*;
 
 import javax.inject.Inject;
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class PneuController implements Initializable {
     @Inject
+    private StorageLoader loader;
+
     private Storage storage;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        try {
+            storage = loader.loadFromPersistance(resources.getString("persistence"));
+        } catch (MissingResourceException e) {
+            storage = loader.createEmpty();
+        }
     }
 
     public void addTire(String rackName) {
@@ -44,7 +45,7 @@ public class PneuController implements Initializable {
         }
 
         for (int i = 0; i < ids.size(); i++) {
-            if(!ids.contains(i)){
+            if (!ids.contains(i)) {
                 return i;
             }
         }

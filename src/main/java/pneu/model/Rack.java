@@ -1,24 +1,24 @@
 package pneu.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rack {
-    private String name;
-    private List<Slot> content;
+    private final String name;
+    private final List<Slot> content;
+
+    Rack(String name) {
+        this.name = name;
+        content = new ArrayList<>();
+        content.add(new Hole(9860));
+    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<Slot> getContent() {
         return content;
     }
 
-    public void setContent(List<Slot> content) {
-        this.content = content;
-    }
 }

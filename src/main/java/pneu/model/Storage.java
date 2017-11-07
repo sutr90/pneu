@@ -10,10 +10,12 @@ public class Storage {
 
     }
 
-    Storage(int rackCount){
+    private static String[] labels = {"A", "B", "C", "D", "E"};
+
+    Storage(int rackCount) {
         racks = new ArrayList<>(rackCount);
         for (int i = 0; i < rackCount; i++) {
-            racks.add(new Rack());
+            racks.add(new Rack(labels[i]));
         }
     }
 
