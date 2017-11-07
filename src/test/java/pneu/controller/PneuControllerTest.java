@@ -3,96 +3,79 @@ package pneu.controller;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pneu.model.Hole;
-import pneu.model.Slot;
-import pneu.model.Tire;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
+import pneu.controller.vo.TireVO;
+import pneu.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PneuControllerTest {
+    @Spy
+    private StorageService storageService;
+
+    @Spy
+    private StorageLoader loader;
+
+    @InjectMocks
     private PneuController controller;
 
     @Before
-    public void init(){
-        this.controller = new PneuController();
+    public void init() {
+        controller = new PneuController();
+        MockitoAnnotations.initMocks(this);
+        controller.initialize();
     }
 
     @Test
-    public void emptyRack(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Hole());
-
-        Assert.assertEquals(0, controller.getFreeSlotId(slots));
+    public void emptyStorage() {
+        Assert.assertEquals(5, controller.getRacks().size());
     }
 
     @Test
-    public void singleTireAtBeginning(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Tire(0));
-        slots.add(new Hole());
-
-        Assert.assertEquals(1, controller.getFreeSlotId(slots));
+    public void getNameRack() {
+        Optional<Rack> aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst();
+        Assert.assertEquals(true, aRack.isPresent());
     }
 
     @Test
-    public void singleTireAtEnd(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Hole());
-        slots.add(new Tire(1));
+    public void addTireToEmptyRack(){
+        Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
 
-        Assert.assertEquals(0, controller.getFreeSlotId(slots));
+        Assert.assertEquals(1, aRack.getContent().size());
+        Assert.assertEquals(Hole.class, aRack.getContent().get(0).getClass());
+
+        controller.addTire("A", (Hole) aRack.getContent().get(0), new TireVO());
+        Assert.assertEquals(2, aRack.getContent().size());
+        Assert.assertEquals(Tire.class, aRack.getContent().get(0).getClass());
+        Assert.assertEquals(Hole.class, aRack.getContent().get(1).getClass());
+
+        Tire firstTire = (Tire) aRack.getContent().get(0);
+        Assert.assertEquals(0, firstTire.getId());
     }
 
     @Test
-    public void twoHoleAtBeginning(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Hole());
-        slots.add(new Tire(2));
+    public void addNewTireToRack(){
+        Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
 
-        Assert.assertEquals(0, controller.getFreeSlotId(slots));
+        Assert.assertEquals(1, aRack.getContent().size());
+        Assert.assertEquals(Hole.class, aRack.getContent().get(0).getClass());
+
+        controller.addTire("A", (Hole) aRack.getContent().get(0), new TireVO());
+        controller.addTire("A", (Hole) aRack.getContent().get(0), new TireVO());
+        Assert.assertEquals(2, aRack.getContent().size());
+        Assert.assertEquals(Tire.class, aRack.getContent().get(0).getClass());
+        Assert.assertEquals(Hole.class, aRack.getContent().get(1).getClass());
+
+        Tire firstTire = (Tire) aRack.getContent().get(0);
+        Assert.assertEquals(0, firstTire.getId());
     }
-
-
-    @Test
-    public void singleHoleAtBeginningMultipleTires(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Hole());
-        slots.add(new Tire(1));
-        slots.add(new Tire(2));
-        slots.add(new Tire(3));
-
-        Assert.assertEquals(0, controller.getFreeSlotId(slots));
-    }
-
-    @Test
-    public void twoHoleAtBeginningMultipleTires(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Hole());
-        slots.add(new Tire(2));
-        slots.add(new Tire(3));
-
-        Assert.assertEquals(0, controller.getFreeSlotId(slots));
-    }
-
-    @Test
-    public void singleHoleInMiddle(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Tire(0));
-        slots.add(new Hole());
-        slots.add(new Tire(2));
-
-        Assert.assertEquals(1, controller.getFreeSlotId(slots));
-    }
-
-    @Test
-    public void twoHoleInMiddle(){
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new Tire(0));
-        slots.add(new Hole());
-        slots.add(new Tire(3));
-
-        Assert.assertEquals(1, controller.getFreeSlotId(slots));
-    }
-
 }

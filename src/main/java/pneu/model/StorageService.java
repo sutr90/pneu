@@ -1,0 +1,52 @@
+package pneu.model;
+
+import pneu.controller.vo.TireVO;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class StorageService {
+    public boolean storeTire(Storage storage, String rackName, Hole hole, TireVO tireInfo) {
+        Optional<Rack> rackOptional = storage.getRacks().stream().filter(rack -> rack.getName().equals(rackName)).findFirst();
+
+        if (rackOptional.isPresent()) {
+            Rack rackInstance = rackOptional.get();
+            List<Slot> content = rackInstance.getContent();
+            int tireId = getFreeSlotId(content);
+
+            int holeIndex = content.indexOf(hole);
+            if (holeIndex == -1) {
+                return false;
+            }
+
+            content.remove(holeIndex);
+
+            // todo check if fits
+
+            Tire tire = new Tire(tireId);
+            content.add(holeIndex, new Hole(100)); // todo old hole width - tire width
+            content.add(holeIndex, tire);
+            return true;
+        }
+        return false;
+    }
+
+    private int getFreeSlotId(List<Slot> content) {
+        Set<Integer> ids = content.stream().filter(slot -> slot instanceof Tire).map(value -> ((Tire) value).getId()).collect(Collectors.toSet());
+
+        if (ids.size() == 0) {
+            return 0;
+        }
+
+        for (int i = 0; i < ids.size(); i++) {
+            if (!ids.contains(i)) {
+                return i;
+            }
+        }
+
+        return ids.size();
+    }
+
+}
