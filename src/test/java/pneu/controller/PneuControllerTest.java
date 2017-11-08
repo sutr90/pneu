@@ -119,4 +119,29 @@ public class PneuControllerTest {
         Assert.assertEquals(Tire.class, content.get(0).getClass());
         Assert.assertEquals(Hole.class, content.get(1).getClass());
     }
+
+    @Test
+    public void mergingMultipleHoles() {
+        Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
+
+        List<Slot> content = aRack.getContent();
+        controller.addTire("A", (Hole) content.get(0), new TireVO());
+        controller.addTire("A", (Hole) content.get(1), new TireVO());
+        controller.addTire("A", (Hole) content.get(2), new TireVO());
+        controller.addTire("A", (Hole) content.get(3), new TireVO());
+
+        Tire secondTire = (Tire) content.get(1);
+        Tire thirdTire = (Tire) content.get(2);
+
+        Assert.assertEquals(5, content.size());
+
+        controller.removeTire(secondTire);
+        controller.removeTire(thirdTire);
+
+        Assert.assertEquals(4, content.size());
+        Assert.assertEquals(Tire.class, content.get(0).getClass());
+        Assert.assertEquals(Hole.class, content.get(1).getClass());
+        Assert.assertEquals(Tire.class, content.get(2).getClass());
+        Assert.assertEquals(Hole.class, content.get(3).getClass());
+    }
 }
