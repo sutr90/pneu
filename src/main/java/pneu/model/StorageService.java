@@ -2,6 +2,7 @@ package pneu.model;
 
 import pneu.controller.vo.TireVO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -51,8 +52,8 @@ public class StorageService {
 
     public void removeTire(Storage storage, Tire tire) {
         List<Slot> contents = null;
-        for(Rack r : storage.getRacks()){
-            if(r.getContent().contains(tire)){
+        for (Rack r : storage.getRacks()) {
+            if (r.getContent().contains(tire)) {
                 contents = r.getContent();
                 break;
             }
@@ -66,5 +67,31 @@ public class StorageService {
 
         contents.remove(idx);
         contents.add(idx, new Hole(tire.getWidth()));
+
+        mergeHoles(contents);
+    }
+
+    private void mergeHoles(List<Slot> contents) {
+        List<Slot> tempList = new ArrayList<>();
+
+        int lenBuffer = 0;
+        for (Slot slot : contents) {
+            if (slot.getClass().equals(Tire.class)) {
+                if (lenBuffer > 0) {
+                    tempList.add(new Hole(lenBuffer));
+                    lenBuffer = 0;
+                }
+                tempList.add(slot);
+            } else {
+                lenBuffer += slot.getWidth();
+            }
+        }
+
+        if (lenBuffer > 0) {
+            tempList.add(new Hole(lenBuffer));
+        }
+
+        contents.clear();
+        contents.addAll(tempList);
     }
 }
