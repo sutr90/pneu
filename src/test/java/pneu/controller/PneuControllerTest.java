@@ -44,7 +44,7 @@ public class PneuControllerTest {
     }
 
     @Test
-    public void addTireToEmptyRack(){
+    public void addTireToEmptyRack() {
         Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
 
         Assert.assertEquals(1, aRack.getContent().size());
@@ -60,7 +60,7 @@ public class PneuControllerTest {
     }
 
     @Test
-    public void addNewTireToRack(){
+    public void addNewTireToRack() {
         Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
 
         List<Slot> content = aRack.getContent();
@@ -72,12 +72,51 @@ public class PneuControllerTest {
 
         Assert.assertEquals(3, content.size());
         Assert.assertEquals(Tire.class, content.get(0).getClass());
-        Assert.assertEquals(0, ((Tire)content.get(0)).getId());
+        Assert.assertEquals(0, ((Tire) content.get(0)).getId());
         Assert.assertEquals(Tire.class, content.get(1).getClass());
-        Assert.assertEquals(1, ((Tire)content.get(1)).getId());
+        Assert.assertEquals(1, ((Tire) content.get(1)).getId());
         Assert.assertEquals(Hole.class, content.get(2).getClass());
 
         Tire firstTire = (Tire) content.get(0);
         Assert.assertEquals(0, firstTire.getId());
+    }
+
+    @Test
+    public void removeFirstTire() {
+        Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
+
+        List<Slot> content = aRack.getContent();
+        controller.addTire("A", (Hole) content.get(0), new TireVO());
+        controller.addTire("A", (Hole) content.get(1), new TireVO());
+
+        Tire firstTire = (Tire) content.get(0);
+
+        Assert.assertEquals(3, content.size());
+        Assert.assertEquals(Tire.class, content.get(0).getClass());
+
+        controller.removeTire(firstTire);
+        Assert.assertEquals(3, content.size());
+        Assert.assertEquals(Hole.class, content.get(0).getClass());
+        Assert.assertEquals(Tire.class, content.get(1).getClass());
+        Assert.assertEquals(Hole.class, content.get(2).getClass());
+    }
+
+    @Test
+    public void removeSecondTire() {
+        Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
+
+        List<Slot> content = aRack.getContent();
+        controller.addTire("A", (Hole) content.get(0), new TireVO());
+        controller.addTire("A", (Hole) content.get(1), new TireVO());
+
+        Tire secondTire = (Tire) content.get(1);
+
+        Assert.assertEquals(3, content.size());
+        Assert.assertEquals(Tire.class, content.get(0).getClass());
+
+        controller.removeTire(secondTire);
+        Assert.assertEquals(2, content.size());
+        Assert.assertEquals(Tire.class, content.get(0).getClass());
+        Assert.assertEquals(Hole.class, content.get(1).getClass());
     }
 }

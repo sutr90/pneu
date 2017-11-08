@@ -49,4 +49,22 @@ public class StorageService {
         return ids.size();
     }
 
+    public void removeTire(Storage storage, Tire tire) {
+        List<Slot> contents = null;
+        for(Rack r : storage.getRacks()){
+            if(r.getContent().contains(tire)){
+                contents = r.getContent();
+                break;
+            }
+        }
+
+        if (contents == null) {
+            throw new RuntimeException();
+        }
+
+        int idx = contents.indexOf(tire);
+
+        contents.remove(idx);
+        contents.add(idx, new Hole(tire.getWidth()));
+    }
 }

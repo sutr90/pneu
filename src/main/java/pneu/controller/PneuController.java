@@ -32,8 +32,8 @@ public class PneuController {
     }
 
 
-    public void removeTire() {
-
+    public void removeTire(Tire tire) {
+        storageService.removeTire(storage, tire);
     }
 
     public List<Rack> getRacks() {
