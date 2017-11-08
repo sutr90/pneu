@@ -5,17 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import pneu.controller.vo.TireVO;
 import pneu.model.*;
 
-import javax.inject.Inject;
-import java.net.URL;
+import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PneuControllerTest {
@@ -66,16 +63,21 @@ public class PneuControllerTest {
     public void addNewTireToRack(){
         Rack aRack = controller.getRacks().stream().filter(rack -> rack.getName().equals("A")).findFirst().get();
 
-        Assert.assertEquals(1, aRack.getContent().size());
-        Assert.assertEquals(Hole.class, aRack.getContent().get(0).getClass());
+        List<Slot> content = aRack.getContent();
+        Assert.assertEquals(1, content.size());
+        Assert.assertEquals(Hole.class, content.get(0).getClass());
 
-        controller.addTire("A", (Hole) aRack.getContent().get(0), new TireVO());
-        controller.addTire("A", (Hole) aRack.getContent().get(0), new TireVO());
-        Assert.assertEquals(2, aRack.getContent().size());
-        Assert.assertEquals(Tire.class, aRack.getContent().get(0).getClass());
-        Assert.assertEquals(Hole.class, aRack.getContent().get(1).getClass());
+        controller.addTire("A", (Hole) content.get(0), new TireVO());
+        controller.addTire("A", (Hole) content.get(1), new TireVO());
 
-        Tire firstTire = (Tire) aRack.getContent().get(0);
+        Assert.assertEquals(3, content.size());
+        Assert.assertEquals(Tire.class, content.get(0).getClass());
+        Assert.assertEquals(0, ((Tire)content.get(0)).getId());
+        Assert.assertEquals(Tire.class, content.get(1).getClass());
+        Assert.assertEquals(1, ((Tire)content.get(1)).getId());
+        Assert.assertEquals(Hole.class, content.get(2).getClass());
+
+        Tire firstTire = (Tire) content.get(0);
         Assert.assertEquals(0, firstTire.getId());
     }
 }
