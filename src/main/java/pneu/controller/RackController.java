@@ -2,7 +2,6 @@ package pneu.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import pneu.model.Rack;
 import pneu.model.StorageService;
 
 import javax.inject.Inject;
@@ -14,10 +13,12 @@ public class RackController {
     @Inject
     private StorageService storageService;
 
-    private Rack rack;
+    @Inject
+    private String rackName;
 
-    public void setRack(Rack rack) {
-        this.rack = rack;
-        label.setText(rack.getName());
+    @Inject
+    public void initialize() {
+        label.setText(rackName);
+        System.out.println(storageService);
     }
 }
