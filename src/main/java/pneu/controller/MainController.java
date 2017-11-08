@@ -1,12 +1,20 @@
 package pneu.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import pneu.controller.vo.TireVO;
 import pneu.model.*;
 
 import javax.inject.Inject;
 import java.util.List;
 
-public class PneuController {
+public class MainController {
+    @FXML
+    public Pane sidebar;
+
+    @FXML
+    public Pane mainPanel;
+
     @Inject
     private StorageLoader loader;
 

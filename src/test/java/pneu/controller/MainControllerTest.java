@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PneuControllerTest {
+public class MainControllerTest {
     @Spy
     private StorageService storageService;
 
@@ -23,11 +23,11 @@ public class PneuControllerTest {
     private StorageLoader loader;
 
     @InjectMocks
-    private PneuController controller;
+    private MainController controller;
 
     @Before
     public void init() {
-        controller = new PneuController();
+        controller = new MainController();
         MockitoAnnotations.initMocks(this);
         controller.initialize();
     }
