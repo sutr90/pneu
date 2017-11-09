@@ -3,7 +3,9 @@ package pneu.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import org.greenrobot.eventbus.EventBus;
 import pneu.controller.vo.TireVO;
+import pneu.events.TireAddedEvent;
 import pneu.model.*;
 import pneu.view.RackView;
 
@@ -47,12 +49,14 @@ public class StorageController {
 
         addButton.setOnAction(event -> {
             addTire("A", (Hole) storageService.getRack("A").getContent().stream().filter(Hole.class::isInstance).findFirst().get(), new TireVO());
-            System.out.println("push");
         });
     }
 
     public void addTire(String rackName, Hole hole, TireVO tireInfo) {
-        storageService.storeTire(rackName, hole, tireInfo);
+        Tire tire = storageService.storeTire(rackName, hole, tireInfo);
+        Rack rack = storageService.getRack(rackName);
+
+        EventBus.getDefault().post(new TireAddedEvent(rack, tire));
     }
 
 

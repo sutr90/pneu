@@ -16,7 +16,7 @@ public class StorageService {
         this.storage = storage;
     }
 
-    public boolean storeTire(String rackName, Hole hole, TireVO tireInfo) {
+    public Tire storeTire(String rackName, Hole hole, TireVO tireInfo) {
         Optional<Rack> rackOptional = storage.getRacks().stream().filter(rack -> rack.getName().equals(rackName)).findFirst();
 
         if (rackOptional.isPresent()) {
@@ -26,7 +26,7 @@ public class StorageService {
 
             int holeIndex = content.indexOf(hole);
             if (holeIndex == -1) {
-                return false;
+                return null;
             }
 
             content.remove(holeIndex);
@@ -36,9 +36,9 @@ public class StorageService {
             Tire tire = new Tire(tireId);
             content.add(holeIndex, new Hole(100)); // todo old hole width - tire width
             content.add(holeIndex, tire);
-            return true;
+            return tire;
         }
-        return false;
+        return null;
     }
 
     private int getFreeSlotId(List<Slot> content) {
