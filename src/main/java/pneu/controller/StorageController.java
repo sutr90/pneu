@@ -1,7 +1,7 @@
 package pneu.controller;
 
-import com.airhacks.afterburner.injection.Injector;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import pneu.controller.vo.TireVO;
 import pneu.model.*;
@@ -25,18 +25,18 @@ public class StorageController {
     @Inject
     private String persistenceLocation;
 
-    private Storage storage;
+    @FXML
+    private Button addButton;
 
     @Inject
     public void initialize() {
         if (persistenceLocation == null) {
-            storage = loader.createEmpty();
+            storageService.setStorage(loader.createEmpty());
         } else {
-            storage = loader.loadFromPersistance(persistenceLocation);
+            storageService.setStorage(loader.loadFromPersistance(persistenceLocation));
         }
 
         for (final Rack rack : getRacks()) {
-
             Map<Object, Object> customProperties = new HashMap<>();
             customProperties.put("storageService", storageService);
             customProperties.put("rackName", rack.getName());
@@ -44,18 +44,23 @@ public class StorageController {
             RackView view = new RackView(customProperties::get);
             container.getChildren().add(view.getView());
         }
+
+        addButton.setOnAction(event -> {
+            addTire("A", (Hole) storageService.getRack("A").getContent().stream().filter(Hole.class::isInstance).findFirst().get(), new TireVO());
+            System.out.println("push");
+        });
     }
 
     public void addTire(String rackName, Hole hole, TireVO tireInfo) {
-        storageService.storeTire(storage, rackName, hole, tireInfo);
+        storageService.storeTire(rackName, hole, tireInfo);
     }
 
 
     public void removeTire(Tire tire) {
-        storageService.removeTire(storage, tire);
+        storageService.removeTire(tire);
     }
 
     public List<Rack> getRacks() {
-        return storage.getRacks();
+        return storageService.getRacks();
     }
 }

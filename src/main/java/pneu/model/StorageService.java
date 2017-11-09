@@ -9,7 +9,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StorageService {
-    public boolean storeTire(Storage storage, String rackName, Hole hole, TireVO tireInfo) {
+
+    private Storage storage;
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public boolean storeTire(String rackName, Hole hole, TireVO tireInfo) {
         Optional<Rack> rackOptional = storage.getRacks().stream().filter(rack -> rack.getName().equals(rackName)).findFirst();
 
         if (rackOptional.isPresent()) {
@@ -50,7 +57,7 @@ public class StorageService {
         return ids.size();
     }
 
-    public void removeTire(Storage storage, Tire tire) {
+    public void removeTire(Tire tire) {
         List<Slot> contents = null;
         for (Rack r : storage.getRacks()) {
             if (r.getContent().contains(tire)) {
@@ -93,5 +100,13 @@ public class StorageService {
 
         contents.clear();
         contents.addAll(tempList);
+    }
+
+    public Rack getRack(String rackName) {
+        return storage.getRacks().stream().filter(rack -> rackName.equals(rack.getName())).findFirst().get();
+    }
+
+    public List<Rack> getRacks() {
+        return storage.getRacks();
     }
 }

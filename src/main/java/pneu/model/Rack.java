@@ -1,16 +1,15 @@
 package pneu.model;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Rack {
     private final String name;
-    private final List<Slot> content;
+    private final ObservableList<Slot> content;
 
     Rack(String name) {
         this.name = name;
-        content = new LinkedList<>();
+        content = FXCollections.observableArrayList();
         content.add(new Hole(9860));
     }
 
@@ -18,7 +17,7 @@ public class Rack {
         return name;
     }
 
-    public List<Slot> getContent() {
+    public ObservableList<Slot> getContent() {
         return content;
     }
 

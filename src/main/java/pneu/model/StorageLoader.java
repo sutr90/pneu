@@ -6,6 +6,6 @@ public class StorageLoader {
     }
 
     public Storage createEmpty() {
-        return new Storage(5);
+        return new Storage();
     }
 }

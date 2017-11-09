@@ -6,15 +6,11 @@ import java.util.List;
 public class Storage {
     private List<Rack> racks;
 
-    public Storage() {
-
-    }
-
     private static String[] labels = {"A", "B", "C", "D", "E"};
 
-    Storage(int rackCount) {
-        racks = new ArrayList<>(rackCount);
-        for (int i = 0; i < rackCount; i++) {
+    public Storage() {
+        racks = new ArrayList<>(5);
+        for (int i = 0; i < 5; i++) {
             racks.add(new Rack(labels[i]));
         }
     }
