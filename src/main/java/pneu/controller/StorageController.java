@@ -54,18 +54,17 @@ public class StorageController {
 
         addButton.setOnAction(event -> {
             if(selectedSlot != null && selectedSlot instanceof Hole) {
-                addTire("A", (Hole) selectedSlot, new TireVO());
+                addTire((Hole) selectedSlot, new TireVO());
             }
         });
 
         EventBus.getDefault().register(this);
     }
 
-    public void addTire(String rackName, Hole hole, TireVO tireInfo) {
-        Tire tire = storageService.storeTire(rackName, hole, tireInfo);
-        Rack rack = storageService.getRack(rackName);
+    public void addTire(Hole hole, TireVO tireInfo) {
+        Tire tire = storageService.storeTire(hole, tireInfo);
 
-        EventBus.getDefault().post(new TireAddedEvent(rack, tire));
+        EventBus.getDefault().post(new TireAddedEvent(tire));
         EventBus.getDefault().post(new SlotSelectedEvent(null));
     }
 

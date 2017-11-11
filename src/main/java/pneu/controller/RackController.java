@@ -46,7 +46,7 @@ public class RackController {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTireAdded(TireAddedEvent event) {
-        if (rackName.equals(event.getRack().getName())) {
+        if (rackName.equals(event.getTire().getRack().getName())) {
             renderSlots();
         }
     }
