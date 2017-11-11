@@ -4,7 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import pneu.controller.vo.TireVO;
+import pneu.events.SlotSelectedEvent;
 import pneu.events.TireAddedEvent;
 import pneu.model.*;
 import pneu.view.RackView;
@@ -30,6 +33,8 @@ public class StorageController {
     @FXML
     private Button addButton;
 
+    private Slot selectedSlot;
+
     @Inject
     public void initialize() {
         if (persistenceLocation == null) {
@@ -48,8 +53,12 @@ public class StorageController {
         }
 
         addButton.setOnAction(event -> {
-            addTire("A", (Hole) storageService.getRack("A").getContent().stream().filter(Hole.class::isInstance).findFirst().get(), new TireVO());
+            if(selectedSlot != null && selectedSlot instanceof Hole) {
+                addTire("A", (Hole) selectedSlot, new TireVO());
+            }
         });
+
+        EventBus.getDefault().register(this);
     }
 
     public void addTire(String rackName, Hole hole, TireVO tireInfo) {
@@ -57,6 +66,7 @@ public class StorageController {
         Rack rack = storageService.getRack(rackName);
 
         EventBus.getDefault().post(new TireAddedEvent(rack, tire));
+        EventBus.getDefault().post(new SlotSelectedEvent(null));
     }
 
 
@@ -66,5 +76,10 @@ public class StorageController {
 
     public List<Rack> getRacks() {
         return storageService.getRacks();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSlotSelected(SlotSelectedEvent slotSelectedEvent) {
+        this.selectedSlot = slotSelectedEvent.slot;
     }
 }
