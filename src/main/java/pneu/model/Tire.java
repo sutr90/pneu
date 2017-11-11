@@ -9,7 +9,7 @@ public class Tire implements Slot {
 
     @Override
     public int getWidth() {
-        return 1;
+        return 300;
     }
 
     public int getId() {
