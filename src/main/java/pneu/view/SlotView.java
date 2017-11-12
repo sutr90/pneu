@@ -19,7 +19,7 @@ public class SlotView extends Group {
     public SlotView(@NotNull Slot slot) {
         this.slot = slot;
         setDefaultColor();
-        r = new Rectangle(slot.getWidth() / 10, 50);
+        r = new Rectangle(slot.getWidth() / 10, 100);
         r.setOnMouseClicked(event -> EventBus.getDefault().post(new SlotSelectedEvent(slot)));
         r.setFill(defaultColor);
         getChildren().add(r);

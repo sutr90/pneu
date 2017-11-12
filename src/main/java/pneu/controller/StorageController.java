@@ -1,12 +1,12 @@
 package pneu.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import pneu.controller.vo.TireVO;
+import pneu.events.AddButtonPressedEvent;
 import pneu.events.SlotSelectedEvent;
 import pneu.events.TireAddedEvent;
 import pneu.model.*;
@@ -30,9 +30,6 @@ public class StorageController {
     @Inject
     private String persistenceLocation;
 
-    @FXML
-    private Button addButton;
-
     private Slot selectedSlot;
 
     @Inject
@@ -51,12 +48,6 @@ public class StorageController {
             RackView view = new RackView(customProperties::get);
             container.getChildren().add(view.getView());
         }
-
-        addButton.setOnAction(event -> {
-            if(selectedSlot != null && selectedSlot instanceof Hole) {
-                addTire((Hole) selectedSlot, new TireVO());
-            }
-        });
 
         EventBus.getDefault().register(this);
     }
@@ -80,5 +71,12 @@ public class StorageController {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSlotSelected(SlotSelectedEvent slotSelectedEvent) {
         this.selectedSlot = slotSelectedEvent.slot;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAddButtonPressed(AddButtonPressedEvent e) {
+        if (selectedSlot != null && selectedSlot instanceof Hole) {
+            addTire((Hole) selectedSlot, new TireVO());
+        }
     }
 }
