@@ -37,6 +37,7 @@ public class MainController {
             TireFormView tfv = new TireFormView();
             Stage tireForm = new Stage();
             Scene scene = new Scene(tfv.getView());
+            scene.getStylesheets().add(getClass().getResource("../app.css").toExternalForm());
             tireForm.setScene(scene);
             tireForm.setResizable(false);
             tireForm .initOwner(addButton.getScene().getWindow());

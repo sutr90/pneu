@@ -18,6 +18,7 @@ public class App extends Application {
 
         MainView appView = new MainView();
         Scene scene = new Scene(appView.getView());
+        scene.getStylesheets().add(getClass().getResource("app.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
