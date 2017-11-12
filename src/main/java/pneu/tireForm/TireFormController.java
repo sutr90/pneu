@@ -1,10 +1,10 @@
 package pneu.tireForm;
 
 import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.textfield.TextFields;
@@ -60,19 +60,33 @@ public class TireFormController {
     public TextField licensePlate;
     @FXML
     public TextField manufacturer;
+    @FXML
+    public GridPane root;
+
+    private boolean dirty;
 
     @Inject
     private StorageService storageService;
 
     @FXML
     public void onCancel() {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+        if (dirty) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Máte neuložené změny. Opravdu chcete zavřít tento dialog?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait()
+                    .filter(response -> response == ButtonType.YES)
+                    .ifPresent(response -> closeWindow());
+        } else {
+            closeWindow();
+        }
     }
 
     @FXML
     public void onSubmit() {
-        Stage stage = (Stage) okButton.getScene().getWindow();
+        closeWindow();
+    }
+
+    private void closeWindow() {
+        Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
 
@@ -92,7 +106,7 @@ public class TireFormController {
     @Inject
     public void initialize() {
         //todo prefill info based on storageService status
-
+        dirty = false;
         ValidationSupport support = new ValidationSupport();
         support.registerValidator(radius, true, Validators.emptyNumericError);
         support.registerValidator(price, false, Validators.emptyNumericError);
@@ -119,6 +133,26 @@ public class TireFormController {
         cancelButton.setCancelButton(true);
 
         okButton.disableProperty().bind(support.invalidProperty());
+
+        root.getChildren().stream().filter(TextField.class::isInstance)
+                .forEach(node -> ((TextField) node).textProperty()
+                        .addListener((observable, oldValue, newValue) -> {
+                            dirty = true;
+                            System.out.println(oldValue + " " + newValue);
+                        }));
+        root.getChildren().stream().filter(DatePicker.class::isInstance)
+                .forEach(node -> ((DatePicker) node).valueProperty()
+                        .addListener((observable, oldValue, newValue) -> {
+                            dirty = true;
+                            System.out.println(oldValue + " " + newValue);
+                        }));
+        root.getChildren().stream().filter(SegmentedButton.class::isInstance)
+                .forEach(node -> ((SegmentedButton) node).getButtons()
+                        .forEach(toggleButton -> toggleButton.selectedProperty()
+                                .addListener((observable, oldValue, newValue) -> {
+                                    dirty = true;
+                                    System.out.println(oldValue + " " + newValue);
+                                })));
     }
 
     private void initDefaults() {

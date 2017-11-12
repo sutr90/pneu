@@ -13,7 +13,7 @@
 <?import org.controlsfx.control.SegmentedButton?>
 
 <AnchorPane maxWidth="500.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.tireForm.TireFormController">
-    <GridPane maxWidth="600" minWidth="100.0" vgap="7" AnchorPane.topAnchor="7">
+    <GridPane maxWidth="600" minWidth="100.0" vgap="7" AnchorPane.topAnchor="7" fx:id="root">
         <columnConstraints>
             <ColumnConstraints fx:id="colOne" hgrow="NEVER" minWidth="80.0" />
             <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
