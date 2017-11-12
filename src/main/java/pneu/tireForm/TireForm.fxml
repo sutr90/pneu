@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -165,8 +164,8 @@
             <TextField fx:id="rearLeft" GridPane.columnIndex="3" GridPane.rowIndex="6" />
             <TextField fx:id="rearRight" GridPane.columnIndex="5" GridPane.rowIndex="6" />
             <TextField fx:id="price" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Button fx:id="okButton" maxWidth="99999" mnemonicParsing="false" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-            <Button fx:id="cancelButton" maxWidth="99999" mnemonicParsing="false" text="Storno" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <Button fx:id="okButton" maxWidth="99999" mnemonicParsing="false" onAction="#onSubmit" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Button fx:id="cancelButton" maxWidth="99999" mnemonicParsing="false" onAction="#onCancel" text="Storno" GridPane.columnIndex="5" GridPane.rowIndex="8" />
 
 
         </children>

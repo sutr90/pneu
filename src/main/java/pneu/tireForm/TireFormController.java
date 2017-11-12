@@ -1,9 +1,11 @@
 package pneu.tireForm;
 
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.validation.ValidationSupport;
@@ -62,6 +64,19 @@ public class TireFormController {
     @Inject
     private StorageService storageService;
 
+    @FXML
+    public void onCancel() {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void onSubmit() {
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.close();
+    }
+
+
     static class PersistentButtonToggleGroup extends ToggleGroup {
         PersistentButtonToggleGroup() {
             super();
@@ -99,6 +114,11 @@ public class TireFormController {
         }
 
         TextFields.bindAutoCompletion(manufacturer, storageService.getManufacturers());
+
+        okButton.setDefaultButton(true);
+        cancelButton.setCancelButton(true);
+
+        okButton.disableProperty().bind(support.invalidProperty());
     }
 
     private void initDefaults() {
