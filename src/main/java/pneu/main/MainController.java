@@ -1,7 +1,6 @@
 package pneu.main;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -33,21 +32,23 @@ public class MainController {
         StorageView view = new StorageView();
         mainPanel.getChildren().add(view.getView());
 
-        addButton.setOnAction(event -> {
-            TireFormView tfv = new TireFormView();
-            Stage tireForm = new Stage();
-            Scene scene = new Scene(tfv.getView());
-            scene.getStylesheets().add(getClass().getResource("../app.css").toExternalForm());
-            tireForm.setScene(scene);
-            tireForm.setResizable(false);
-            tireForm .initOwner(addButton.getScene().getWindow());
-            tireForm .initModality(Modality.APPLICATION_MODAL);
-            tireForm .showAndWait();
-
-            EventBus.getDefault().post(new AddButtonPressedEvent());
-        });
 
         storageService.getRacks();
+    }
+
+    @FXML
+    public void showDialog() {
+        TireFormView tfv = new TireFormView();
+        Stage tireForm = new Stage();
+        Scene scene = new Scene(tfv.getView());
+        scene.getStylesheets().add(getClass().getResource("../app.css").toExternalForm());
+        tireForm.setScene(scene);
+        tireForm.setResizable(false);
+        tireForm.initOwner(addButton.getScene().getWindow());
+        tireForm.initModality(Modality.APPLICATION_MODAL);
+        tireForm.showAndWait();
+
+        EventBus.getDefault().post(new AddButtonPressedEvent());
     }
 }
 
