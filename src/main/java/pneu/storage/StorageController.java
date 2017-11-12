@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import pneu.controller.vo.TireVO;
+import pneu.vo.TireVO;
 import pneu.events.AddButtonPressedEvent;
 import pneu.events.SlotSelectedEvent;
 import pneu.events.TireAddedEvent;

@@ -1,6 +1,6 @@
 package pneu.storage;
 
-import pneu.controller.vo.TireVO;
+import pneu.vo.TireVO;
 import pneu.rack.Rack;
 import pneu.slot.Hole;
 import pneu.slot.Slot;

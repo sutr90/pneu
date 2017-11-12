@@ -8,6 +8,7 @@ import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.validation.ValidationSupport;
 import pneu.storage.StorageService;
+import pneu.vo.*;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -62,7 +63,7 @@ public class TireFormController {
     private StorageService storageService;
 
     static class PersistentButtonToggleGroup extends ToggleGroup {
-        public PersistentButtonToggleGroup() {
+        PersistentButtonToggleGroup() {
             super();
             getToggles().addListener((ListChangeListener<Toggle>) c -> {
                 while (c.next()) for (final Toggle addedToggle : c.getAddedSubList())
@@ -107,5 +108,61 @@ public class TireFormController {
         tireSegButton.getButtons().get(0).setSelected(true);
         rimSegButton.getButtons().get(0).setSelected(true);
         dateFrom.setValue(LocalDate.now());
+    }
+
+    public TireVO convertToVO() {
+        TireVO tire = new TireVO();
+        CustomerVO customer = new CustomerVO();
+        OrderVO order = new OrderVO();
+
+        customer.name = name.getText();
+        customer.surname = surname.getText();
+        customer.street = street.getText();
+        customer.city = city.getText();
+        customer.licensePlate = licensePlate.getText();
+
+        order.dateFrom = dateFrom.getValue();
+        order.dateTo = dateTo.getValue();
+        order.price = price.getText();
+
+        tire.manufacturer = manufacturer.getText();
+        tire.rimType = getRimType();
+        tire.tireType = getTireType();
+        tire.rearLeft = rearLeft.getText();
+        tire.rearRight = rearRight.getText();
+        tire.frontLeft = frontLeft.getText();
+        tire.frontRight = frontRight.getText();
+        tire.count = count.getText();
+        tire.radius = radius.getText();
+        tire.size = size.getText();
+
+        tire.order = order;
+        tire.customer = customer;
+
+        return tire;
+    }
+
+    private TireType getTireType() {
+        ToggleButton selected = tireSegButton.getButtons().stream().filter(ToggleButton::isSelected).findFirst().get();
+        switch (selected.getText()) {
+            case "Letní":
+                return TireType.SUMMER;
+            case "Zimní":
+                return TireType.WINTER;
+            default:
+                return TireType.UNIVERSAL;
+        }
+    }
+
+    private RimType getRimType() {
+        ToggleButton selected = rimSegButton.getButtons().stream().filter(ToggleButton::isSelected).findFirst().get();
+        switch (selected.getText()) {
+            case "Ocel":
+                return RimType.STEEL;
+            case "Hliník":
+                return RimType.ALUMINUM;
+            default:
+                return RimType.NONE;
+        }
     }
 }
