@@ -1,14 +1,16 @@
 package pneu.tireForm;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.validation.ValidationSupport;
 import pneu.storage.StorageService;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 
 public class TireFormController {
     @FXML
@@ -57,6 +59,18 @@ public class TireFormController {
     @Inject
     private StorageService storageService;
 
+    static class PersistentButtonToggleGroup extends ToggleGroup {
+        public PersistentButtonToggleGroup() {
+            super();
+            getToggles().addListener((ListChangeListener<Toggle>) c -> {
+                while (c.next()) for (final Toggle addedToggle : c.getAddedSubList())
+                    ((ToggleButton) addedToggle).addEventFilter(MouseEvent.MOUSE_RELEASED, mouseEvent -> {
+                        if (addedToggle.equals(getSelectedToggle())) mouseEvent.consume();
+                    });
+            });
+        }
+    }
+
     @Inject
     public void initialize() {
         //todo prefill info based on storageService status
@@ -71,5 +85,23 @@ public class TireFormController {
         support.registerValidator(name, false, Validators.emptyStringWarn);
         support.registerValidator(surname, false, Validators.emptyStringWarn);
         support.initInitialDecoration();
+
+        tireSegButton.getStyleClass().add(SegmentedButton.STYLE_CLASS_DARK);
+        tireSegButton.setToggleGroup(new PersistentButtonToggleGroup());
+        rimSegButton.getStyleClass().add(SegmentedButton.STYLE_CLASS_DARK);
+        rimSegButton.setToggleGroup(new PersistentButtonToggleGroup());
+
+        if (storageService.getSelectedSlot() == null) {
+            initDefaults();
+        }
+    }
+
+    private void initDefaults() {
+        count.setText("4");
+        price.setText("200");
+
+        tireSegButton.getButtons().get(0).setSelected(true);
+        rimSegButton.getButtons().get(0).setSelected(true);
+        dateFrom.setValue(LocalDate.now());
     }
 }

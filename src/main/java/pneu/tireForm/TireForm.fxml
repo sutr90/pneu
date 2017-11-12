@@ -156,6 +156,7 @@
                     <ToggleButton mnemonicParsing="false" prefWidth="${rimSegButton.width / 3}" text="Uni" />
                 </buttons>
             </SegmentedButton>
+
             <TextField fx:id="size" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <TextField fx:id="radius" GridPane.columnIndex="5" GridPane.rowIndex="3" />
             <TextField fx:id="count" GridPane.columnIndex="3" GridPane.rowIndex="4" />
