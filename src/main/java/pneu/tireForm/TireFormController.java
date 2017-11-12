@@ -71,9 +71,14 @@ public class TireFormController {
     @FXML
     public void onCancel() {
         if (dirty) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Máte neuložené změny. Opravdu chcete zavřít tento dialog?", ButtonType.YES, ButtonType.NO);
+            ButtonType ano = new ButtonType("Ano", ButtonBar.ButtonData.YES);
+            ButtonType ne = new ButtonType("Ne", ButtonBar.ButtonData.NO);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Máte neuložené změny. Opravdu chcete zavřít tento dialog?", ano, ne);
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("../app.css").toExternalForm());
+            alert.setTitle("");
+            alert.setHeaderText("Upozornění");
             alert.showAndWait()
-                    .filter(response -> response == ButtonType.YES)
+                    .filter(response -> response == ano)
                     .ifPresent(response -> closeWindow());
         } else {
             closeWindow();
