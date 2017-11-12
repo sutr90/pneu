@@ -32,9 +32,7 @@ public class RackController {
     @Inject
     public void initialize() {
         label.setText(rackName);
-        System.out.println(storageService);
         EventBus.getDefault().register(this);
-
         content = storageService.getRack(rackName).getContent();
         renderSlots();
     }

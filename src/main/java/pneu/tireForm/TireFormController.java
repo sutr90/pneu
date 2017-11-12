@@ -141,23 +141,14 @@ public class TireFormController {
 
         root.getChildren().stream().filter(TextField.class::isInstance)
                 .forEach(node -> ((TextField) node).textProperty()
-                        .addListener((observable, oldValue, newValue) -> {
-                            dirty = true;
-                            System.out.println(oldValue + " " + newValue);
-                        }));
+                        .addListener((observable, oldValue, newValue) -> dirty = true));
         root.getChildren().stream().filter(DatePicker.class::isInstance)
                 .forEach(node -> ((DatePicker) node).valueProperty()
-                        .addListener((observable, oldValue, newValue) -> {
-                            dirty = true;
-                            System.out.println(oldValue + " " + newValue);
-                        }));
+                        .addListener((observable, oldValue, newValue) -> dirty = true));
         root.getChildren().stream().filter(SegmentedButton.class::isInstance)
                 .forEach(node -> ((SegmentedButton) node).getButtons()
                         .forEach(toggleButton -> toggleButton.selectedProperty()
-                                .addListener((observable, oldValue, newValue) -> {
-                                    dirty = true;
-                                    System.out.println(oldValue + " " + newValue);
-                                })));
+                                .addListener((observable, oldValue, newValue) -> dirty = true)));
     }
 
     private void initDefaults() {
