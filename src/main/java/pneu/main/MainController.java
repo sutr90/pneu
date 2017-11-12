@@ -3,13 +3,9 @@ package pneu.main;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.greenrobot.eventbus.EventBus;
-import pneu.events.AddButtonPressedEvent;
 import pneu.storage.StorageService;
 import pneu.storage.StorageView;
 import pneu.tireForm.TireFormView;
@@ -49,8 +45,6 @@ public class MainController {
         tireForm.initOwner(addButton.getScene().getWindow());
         tireForm.initModality(Modality.APPLICATION_MODAL);
         tireForm.showAndWait();
-
-        EventBus.getDefault().post(new AddButtonPressedEvent());
     }
 }
 

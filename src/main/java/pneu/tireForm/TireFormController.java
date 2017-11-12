@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.validation.ValidationSupport;
+import org.greenrobot.eventbus.EventBus;
+import pneu.events.TireFormSubmitted;
 import pneu.slot.Hole;
 import pneu.slot.Slot;
 import pneu.slot.Tire;
@@ -91,6 +93,7 @@ public class TireFormController {
 
     @FXML
     public void onSubmit() {
+        EventBus.getDefault().post(new TireFormSubmitted(convertToVO()));
         closeWindow();
     }
 
@@ -230,12 +233,26 @@ public class TireFormController {
 
     private TireType getTireType() {
         ToggleButton selected = tireSegButton.getButtons().stream().filter(ToggleButton::isSelected).findFirst().get();
-        return TireType.valueOf(selected.getText());
+        switch (selected.getText()) {
+            case "Letní":
+                return TireType.SUMMER;
+            case "Zimní":
+                return TireType.WINTER;
+            default:
+                return TireType.UNIVERSAL;
+        }
     }
 
     private RimType getRimType() {
         ToggleButton selected = rimSegButton.getButtons().stream().filter(ToggleButton::isSelected).findFirst().get();
-        return RimType.valueOf(selected.getText());
+        switch (selected.getText()) {
+            case "Ocel":
+                return RimType.STEEL;
+            case "Hliník":
+                return RimType.ALUMINUM;
+            default:
+                return RimType.NONE;
+        }
     }
 
     private void setRimType(RimType rimType) {

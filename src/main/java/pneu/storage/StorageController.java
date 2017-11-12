@@ -6,7 +6,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import pneu.vo.TireVO;
-import pneu.events.AddButtonPressedEvent;
+import pneu.events.TireFormSubmitted;
 import pneu.events.SlotSelectedEvent;
 import pneu.events.TireAddedEvent;
 import pneu.rack.Rack;
@@ -75,10 +75,10 @@ public class StorageController {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onAddButtonPressed(AddButtonPressedEvent e) {
+    public void onTireFormSubmitted(TireFormSubmitted e) {
         Slot selectedSlot = storageService.getSelectedSlot();
         if (selectedSlot != null && selectedSlot instanceof Hole) {
-            addTire((Hole) selectedSlot, new TireVO());
+            addTire((Hole) selectedSlot, e.tireInfo);
         }
     }
 }
