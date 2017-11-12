@@ -42,11 +42,6 @@ public class MainController {
     public void showDialog() {
         TireFormView tfv = new TireFormView();
         Stage tireForm = new Stage();
-        tireForm.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
-            if (KeyCode.ESCAPE == event.getCode()) {
-                tireForm.close();
-            }
-        });
         Scene scene = new Scene(tfv.getView());
         scene.getStylesheets().add(getClass().getResource("../app.css").toExternalForm());
         tireForm.setScene(scene);

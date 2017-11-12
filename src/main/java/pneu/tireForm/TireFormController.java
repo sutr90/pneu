@@ -1,11 +1,11 @@
 package pneu.tireForm;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.SegmentedButton;
+import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.validation.ValidationSupport;
 import pneu.storage.StorageService;
 
@@ -55,6 +55,8 @@ public class TireFormController {
     public TextField street;
     @FXML
     public TextField licensePlate;
+    @FXML
+    public TextField manufacturer;
 
     @Inject
     private StorageService storageService;
@@ -94,6 +96,8 @@ public class TireFormController {
         if (storageService.getSelectedSlot() == null) {
             initDefaults();
         }
+
+        TextFields.bindAutoCompletion(manufacturer, storageService.getManufacturers());
     }
 
     private void initDefaults() {

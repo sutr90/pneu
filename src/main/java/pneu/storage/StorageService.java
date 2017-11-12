@@ -7,6 +7,7 @@ import pneu.slot.Slot;
 import pneu.slot.Tire;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ public class StorageService {
     private Storage storage;
 
     private Slot selectedSlot;
+    private List<String> manufacturers;
 
     public void setStorage(Storage storage) {
         this.storage = storage;
@@ -107,5 +109,13 @@ public class StorageService {
 
     public void setSelectedSlot(Slot selectedSlot) {
         this.selectedSlot = selectedSlot;
+    }
+
+    public List<String> getManufacturers() {
+        return Arrays.asList("Option 1", "Option 2");
+    }
+
+    void setManufacturers(List<String> manufacturers) {
+        this.manufacturers = manufacturers;
     }
 }
