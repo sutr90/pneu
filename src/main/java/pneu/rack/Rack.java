@@ -1,4 +1,7 @@
-package pneu.model;
+package pneu.rack;
+
+import pneu.slot.Hole;
+import pneu.slot.Slot;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package pneu.model;
+package pneu.storage;
 
 public class StorageLoader {
     public Storage loadFromPersistance(String persistence) {

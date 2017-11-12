@@ -1,4 +1,4 @@
-package pneu.controller;
+package pneu.rack;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,9 +7,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import pneu.events.TireAddedEvent;
-import pneu.model.Slot;
-import pneu.model.StorageService;
-import pneu.view.SlotView;
+import pneu.slot.Slot;
+import pneu.storage.StorageService;
+import pneu.slot.SlotView;
 
 import javax.inject.Inject;
 import java.util.List;

@@ -1,4 +1,6 @@
-package pneu.model;
+package pneu.storage;
+
+import pneu.rack.Rack;
 
 import java.util.ArrayList;
 import java.util.List;

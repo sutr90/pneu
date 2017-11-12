@@ -1,10 +1,12 @@
-package pneu.model;
+package pneu.slot;
+
+import pneu.rack.Rack;
 
 public class Hole implements Slot {
     private final int width;
     private final Rack rack;
 
-    Hole(int width, Rack rack) {
+    public Hole(int width, Rack rack) {
         this.width = width;
         this.rack = rack;
     }

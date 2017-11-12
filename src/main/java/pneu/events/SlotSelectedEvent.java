@@ -1,6 +1,6 @@
 package pneu.events;
 
-import pneu.model.Slot;
+import pneu.slot.Slot;
 
 public class SlotSelectedEvent {
     public final Slot slot;

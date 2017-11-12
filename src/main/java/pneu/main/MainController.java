@@ -1,11 +1,11 @@
-package pneu.controller;
+package pneu.main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import org.greenrobot.eventbus.EventBus;
 import pneu.events.AddButtonPressedEvent;
-import pneu.view.StorageView;
+import pneu.storage.StorageView;
 
 import javax.inject.Inject;
 

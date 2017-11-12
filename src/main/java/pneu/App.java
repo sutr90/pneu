@@ -4,7 +4,7 @@ import com.airhacks.afterburner.injection.Injector;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pneu.view.MainView;
+import pneu.main.MainView;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package pneu.view;
+package pneu.main;
 
 import com.airhacks.afterburner.views.FXMLView;
 

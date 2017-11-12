@@ -1,6 +1,6 @@
 package pneu.events;
 
-import pneu.model.Tire;
+import pneu.slot.Tire;
 
 public class TireAddedEvent {
     private final Tire tire;

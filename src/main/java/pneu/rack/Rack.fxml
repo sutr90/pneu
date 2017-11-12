@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.controller.RackController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.rack.RackController">
     <Label fx:id="label" layoutX="14.0" layoutY="14.0" text="Label"/>
     <HBox fx:id="slots" layoutX="42.0" prefHeight="100.0" prefWidth="200.0"/>
 </AnchorPane>

@@ -1,4 +1,4 @@
-package pneu.view;
+package pneu.slot;
 
 import com.sun.istack.internal.NotNull;
 import javafx.scene.Group;
@@ -8,8 +8,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import pneu.events.SlotSelectedEvent;
-import pneu.model.Slot;
-import pneu.model.Tire;
 
 public class SlotView extends Group {
     private final Rectangle r;

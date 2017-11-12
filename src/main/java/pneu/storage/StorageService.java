@@ -1,6 +1,10 @@
-package pneu.model;
+package pneu.storage;
 
 import pneu.controller.vo.TireVO;
+import pneu.rack.Rack;
+import pneu.slot.Hole;
+import pneu.slot.Slot;
+import pneu.slot.Tire;
 
 import java.util.ArrayList;
 import java.util.List;

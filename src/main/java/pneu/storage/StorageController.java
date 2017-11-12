@@ -1,4 +1,4 @@
-package pneu.controller;
+package pneu.storage;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -9,8 +9,11 @@ import pneu.controller.vo.TireVO;
 import pneu.events.AddButtonPressedEvent;
 import pneu.events.SlotSelectedEvent;
 import pneu.events.TireAddedEvent;
-import pneu.model.*;
-import pneu.view.RackView;
+import pneu.rack.Rack;
+import pneu.rack.RackView;
+import pneu.slot.Hole;
+import pneu.slot.Slot;
+import pneu.slot.Tire;
 
 import javax.inject.Inject;
 import java.util.HashMap;
