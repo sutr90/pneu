@@ -16,7 +16,7 @@
 <AnchorPane prefHeight="400.0" maxWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.tireForm.TireFormController">
     <GridPane minWidth="100.0" maxWidth="600" vgap="7" AnchorPane.topAnchor="7">
         <columnConstraints>
-            <ColumnConstraints fx:id="colOne" hgrow="NEVER" minWidth="60.0" />
+            <ColumnConstraints fx:id="colOne" hgrow="NEVER" minWidth="80.0" />
             <ColumnConstraints hgrow="NEVER" minWidth="10.0"  />
             <ColumnConstraints fx:id="colTwo" hgrow="NEVER" minWidth="80.0"/>
             <ColumnConstraints hgrow="NEVER" minWidth="90" />
@@ -37,37 +37,37 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Od">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="Od">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Do" GridPane.rowIndex="1">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="Do" GridPane.rowIndex="1">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Jméno" GridPane.rowIndex="2">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="Jméno" GridPane.rowIndex="2">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Příjmení" GridPane.rowIndex="3">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="Příjmení" GridPane.rowIndex="3">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Ulice" GridPane.rowIndex="4">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="Ulice" GridPane.rowIndex="4">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Město" GridPane.rowIndex="5">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="Město" GridPane.rowIndex="5">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="SPZ" GridPane.rowIndex="6">
+            <Label alignment="CENTER_RIGHT" minWidth="${colOne.minWidth}" text="SPZ" GridPane.rowIndex="6">
                 <padding>
                     <Insets right="5" />
                 </padding>
@@ -82,22 +82,22 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Výrobce" GridPane.columnIndex="2">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Výrobce" GridPane.columnIndex="2">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Disk" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Disk" GridPane.columnIndex="2" GridPane.rowIndex="1">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Typ pneu" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Typ pneu" GridPane.columnIndex="2" GridPane.rowIndex="2">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Rozměry" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Rozměry" GridPane.columnIndex="2" GridPane.rowIndex="3">
                 <padding>
                     <Insets right="5" />
                 </padding>
@@ -107,12 +107,12 @@
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Počet" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Počet" GridPane.columnIndex="2" GridPane.rowIndex="4">
                 <padding>
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="LP" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="LP" GridPane.columnIndex="2" GridPane.rowIndex="5">
                 <padding>
                     <Insets right="5" />
                 </padding>
@@ -122,7 +122,7 @@
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="LZ" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="LZ" GridPane.columnIndex="2" GridPane.rowIndex="6">
                 <padding>
                     <Insets right="5" />
                 </padding>
@@ -132,7 +132,7 @@
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Cena" GridPane.columnIndex="2" GridPane.rowIndex="7">
+            <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Cena" GridPane.columnIndex="2" GridPane.rowIndex="7">
                 <padding>
                     <Insets right="5" />
                 </padding>
