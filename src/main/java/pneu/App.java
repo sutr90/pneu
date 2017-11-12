@@ -19,6 +19,7 @@ public class App extends Application {
         MainView appView = new MainView();
         Scene scene = new Scene(appView.getView());
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

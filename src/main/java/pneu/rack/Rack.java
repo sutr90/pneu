@@ -10,7 +10,7 @@ public class Rack {
     private final String name;
     private final List<Slot> content;
 
-    Rack(String name) {
+    public Rack(String name) {
         this.name = name;
         content = new ArrayList<>();
         content.add(new Hole(9860, this));
