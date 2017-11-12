@@ -17,7 +17,6 @@ public class StorageService {
     private Storage storage;
 
     private Slot selectedSlot;
-    private List<String> manufacturers;
 
     public void setStorage(Storage storage) {
         this.storage = storage;
@@ -111,11 +110,7 @@ public class StorageService {
         this.selectedSlot = selectedSlot;
     }
 
-    public List<String> getManufacturers() {
-        return Arrays.asList("Option 1", "Option 2");
-    }
-
-    void setManufacturers(List<String> manufacturers) {
-        this.manufacturers = manufacturers;
+    public Set<String> getManufacturers() {
+        return storage.getManufacturers();
     }
 }

@@ -78,6 +78,7 @@ public class StorageController {
     public void onTireFormSubmitted(TireFormSubmitted e) {
         Slot selectedSlot = storageService.getSelectedSlot();
         if (selectedSlot != null && selectedSlot instanceof Hole) {
+            storageService.getManufacturers().add(e.tireInfo.manufacturer);
             addTire((Hole) selectedSlot, e.tireInfo);
         }
     }
