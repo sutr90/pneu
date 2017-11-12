@@ -1,13 +1,12 @@
 package pneu.storage;
 
-import pneu.vo.TireVO;
 import pneu.rack.Rack;
 import pneu.slot.Hole;
 import pneu.slot.Slot;
 import pneu.slot.Tire;
+import pneu.vo.TireVO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,15 +57,32 @@ public class StorageService {
         return ids.size();
     }
 
-    public void removeTire(Tire tire) {
-        List<Slot> contents = tire.getRack().getContent();
+    public Hole removeTire(Tire tire) {
+        Rack rack = tire.getRack();
+        List<Slot> contents = rack.getContent();
 
         int idx = contents.indexOf(tire);
 
         contents.remove(idx);
-        contents.add(idx, new Hole(tire.getWidth(), tire.getRack()));
+        contents.add(idx, new Hole(tire.getWidth(), rack));
 
-        mergeHoles(tire.getRack());
+        mergeHoles(rack);
+
+        return findCreatedHole(rack, idx);
+    }
+
+    private Hole findCreatedHole(Rack rack, int idx) {
+        List<Slot> contents = rack.getContent();
+        if (contents.size() - 1 < idx) {
+            idx = contents.size() - 1;
+        }
+        for (int i = idx; i >= 0; i--) {
+            if (contents.get(i) instanceof Hole) {
+                return (Hole) contents.get(i);
+            }
+        }
+
+        return null;
     }
 
     private void mergeHoles(Rack rack) {

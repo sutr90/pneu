@@ -5,15 +5,15 @@ import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import pneu.vo.TireVO;
-import pneu.events.TireFormSubmitted;
 import pneu.events.SlotSelectedEvent;
 import pneu.events.TireAddedEvent;
+import pneu.events.TireFormSubmitted;
 import pneu.rack.Rack;
 import pneu.rack.RackView;
 import pneu.slot.Hole;
 import pneu.slot.Slot;
 import pneu.slot.Tire;
+import pneu.vo.TireVO;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -53,16 +53,17 @@ public class StorageController {
         EventBus.getDefault().register(this);
     }
 
-    public void addTire(Hole hole, TireVO tireInfo) {
+    public Tire addTire(Hole hole, TireVO tireInfo) {
         Tire tire = storageService.storeTire(hole, tireInfo);
 
         EventBus.getDefault().post(new TireAddedEvent(tire));
         EventBus.getDefault().post(new SlotSelectedEvent(null));
+        return tire;
     }
 
 
-    public void removeTire(Tire tire) {
-        storageService.removeTire(tire);
+    public Hole removeTire(Tire tire) {
+        return storageService.removeTire(tire);
     }
 
     public List<Rack> getRacks() {
@@ -77,9 +78,12 @@ public class StorageController {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTireFormSubmitted(TireFormSubmitted e) {
         Slot selectedSlot = storageService.getSelectedSlot();
+        storageService.getManufacturers().add(e.tireInfo.manufacturer);
         if (selectedSlot != null && selectedSlot instanceof Hole) {
-            storageService.getManufacturers().add(e.tireInfo.manufacturer);
             addTire((Hole) selectedSlot, e.tireInfo);
+        } else if (selectedSlot instanceof Tire) {
+            Hole hole = removeTire((Tire) selectedSlot);
+            Tire newTire = addTire(hole, e.tireInfo);
         }
     }
 }

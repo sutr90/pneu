@@ -1,12 +1,15 @@
 package pneu.slot;
 
 import com.sun.istack.internal.NotNull;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import pneu.events.ShowTireFormEvent;
 import pneu.events.SlotSelectedEvent;
 
 public class SlotView extends Group {
@@ -18,9 +21,25 @@ public class SlotView extends Group {
         this.slot = slot;
         setDefaultColor();
         r = new Rectangle(slot.getWidth() / 10, 100);
-        r.setOnMouseClicked(event -> EventBus.getDefault().post(new SlotSelectedEvent(slot)));
+        r.setOnMouseClicked(event -> {
+            EventBus.getDefault().post(new SlotSelectedEvent(slot));
+            if (event.getClickCount() > 1) {
+                EventBus.getDefault().post(new ShowTireFormEvent());
+            }
+        });
+
         r.setFill(defaultColor);
         getChildren().add(r);
+
+        if (slot instanceof Tire) {
+            Label tireLabel = new Label(((Tire) slot).getId() + "");
+            tireLabel.setPrefWidth(r.getWidth());
+            tireLabel.setPrefHeight(r.getHeight());
+            tireLabel.setAlignment(Pos.CENTER);
+            tireLabel.setMouseTransparent(true);
+            getChildren().add(tireLabel);
+        }
+
         EventBus.getDefault().register(this);
     }
 
