@@ -15,6 +15,8 @@ public class StorageService {
 
     private Storage storage;
 
+    private Slot selectedSlot;
+
     public void setStorage(Storage storage) {
         this.storage = storage;
     }
@@ -97,5 +99,13 @@ public class StorageService {
 
     public List<Rack> getRacks() {
         return storage.getRacks();
+    }
+
+    public Slot getSelectedSlot() {
+        return selectedSlot;
+    }
+
+    public void setSelectedSlot(Slot selectedSlot) {
+        this.selectedSlot = selectedSlot;
     }
 }

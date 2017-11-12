@@ -33,8 +33,6 @@ public class StorageController {
     @Inject
     private String persistenceLocation;
 
-    private Slot selectedSlot;
-
     @Inject
     public void initialize() {
         if (persistenceLocation == null) {
@@ -73,11 +71,12 @@ public class StorageController {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSlotSelected(SlotSelectedEvent slotSelectedEvent) {
-        this.selectedSlot = slotSelectedEvent.slot;
+        storageService.setSelectedSlot(slotSelectedEvent.slot);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddButtonPressed(AddButtonPressedEvent e) {
+        Slot selectedSlot = storageService.getSelectedSlot();
         if (selectedSlot != null && selectedSlot instanceof Hole) {
             addTire((Hole) selectedSlot, new TireVO());
         }
