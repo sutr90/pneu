@@ -5,12 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.SegmentedButton;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationResult;
 import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 import pneu.storage.StorageService;
-import pneu.utils.Utils;
 
 import javax.inject.Inject;
 
@@ -66,19 +62,14 @@ public class TireFormController {
         //todo prefill info based on storageService status
 
         ValidationSupport support = new ValidationSupport();
-
-        Validator<String> numericOrEmpty = (control, value) -> {
-            boolean condition = false;
-
-            if (value != null && value.trim().length() > 0) {
-                condition = !Utils.isNumeric(value);
-            }
-
-            System.out.println(value + condition);
-
-            return ValidationResult.fromMessageIf(control, "Zadejte číslo", Severity.ERROR, condition);
-        };
-
-        support.registerValidator(radius, true, numericOrEmpty);
+        support.registerValidator(radius, true, Validators.emptyNumericError);
+        support.registerValidator(price, false, Validators.emptyNumericError);
+        support.registerValidator(count, true, Validators.emptyNumericError);
+        support.registerValidator(size, true, Validators.tireSizeFormatError);
+        support.registerValidator(dateFrom, false, Validators.emptyDateWarn);
+        support.registerValidator(dateTo, false, Validators.emptyDateWarn);
+        support.registerValidator(name, false, Validators.emptyStringWarn);
+        support.registerValidator(surname, false, Validators.emptyStringWarn);
+        support.initInitialDecoration();
     }
 }
