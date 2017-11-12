@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import org.controlsfx.control.SegmentedButton;
 import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.validation.ValidationSupport;
+import pneu.slot.Hole;
+import pneu.slot.Slot;
+import pneu.slot.Tire;
 import pneu.storage.StorageService;
 import pneu.vo.*;
 
@@ -62,11 +65,12 @@ public class TireFormController {
     public TextField manufacturer;
     @FXML
     public GridPane root;
+    @Inject
+    private StorageService storageService;
 
     private boolean dirty;
 
-    @Inject
-    private StorageService storageService;
+    private boolean creating;
 
     @FXML
     public void onCancel() {
@@ -128,8 +132,12 @@ public class TireFormController {
         rimSegButton.getStyleClass().add(SegmentedButton.STYLE_CLASS_DARK);
         rimSegButton.setToggleGroup(new PersistentButtonToggleGroup());
 
-        if (storageService.getSelectedSlot() == null) {
+        Slot selectedSlot = storageService.getSelectedSlot();
+        if (selectedSlot == null || selectedSlot instanceof Hole) {
             initDefaults();
+            creating = true;
+        } else {
+            fillInit((Tire) selectedSlot);
         }
 
         TextFields.bindAutoCompletion(manufacturer, storageService.getManufacturers());
@@ -149,6 +157,34 @@ public class TireFormController {
                 .forEach(node -> ((SegmentedButton) node).getButtons()
                         .forEach(toggleButton -> toggleButton.selectedProperty()
                                 .addListener((observable, oldValue, newValue) -> dirty = true)));
+    }
+
+    private void fillInit(Tire selectedTire) {
+        TireVO tire = selectedTire.getTireInfo();
+        CustomerVO customer = tire.customer;
+        OrderVO order = tire.order;
+
+        name.setText(customer.name);
+        surname.setText(customer.surname);
+        street.setText(customer.street);
+        city.setText(customer.city);
+        licensePlate.setText(customer.licensePlate);
+
+        dateFrom.setValue(order.dateFrom);
+        dateTo.setValue(order.dateTo);
+        price.setText(order.price);
+
+        manufacturer.setText(tire.manufacturer);
+        setRimType(tire.rimType);
+        setTireType(tire.tireType);
+        rearLeft.setText(tire.rearLeft);
+        rearRight.setText(tire.rearRight);
+        frontLeft.setText(tire.frontLeft);
+        frontRight.setText(tire.frontRight);
+        count.setText(tire.count);
+        radius.setText(tire.radius);
+        size.setText(tire.size);
+        dirty = false;
     }
 
     private void initDefaults() {
@@ -194,25 +230,19 @@ public class TireFormController {
 
     private TireType getTireType() {
         ToggleButton selected = tireSegButton.getButtons().stream().filter(ToggleButton::isSelected).findFirst().get();
-        switch (selected.getText()) {
-            case "Letní":
-                return TireType.SUMMER;
-            case "Zimní":
-                return TireType.WINTER;
-            default:
-                return TireType.UNIVERSAL;
-        }
+        return TireType.valueOf(selected.getText());
     }
 
     private RimType getRimType() {
         ToggleButton selected = rimSegButton.getButtons().stream().filter(ToggleButton::isSelected).findFirst().get();
-        switch (selected.getText()) {
-            case "Ocel":
-                return RimType.STEEL;
-            case "Hliník":
-                return RimType.ALUMINUM;
-            default:
-                return RimType.NONE;
-        }
+        return RimType.valueOf(selected.getText());
+    }
+
+    private void setRimType(RimType rimType) {
+        rimSegButton.getButtons().stream().filter(toggleButton -> rimType.equalsName(toggleButton.getText())).findFirst().get().setSelected(true);
+    }
+
+    private void setTireType(TireType tireType) {
+        tireSegButton.getButtons().stream().filter(toggleButton -> tireType.equalsName(toggleButton.getText())).findFirst().get().setSelected(true);
     }
 }

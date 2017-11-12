@@ -37,7 +37,7 @@ public class StorageService {
 
         // todo check if fits
 
-        Tire tire = new Tire(tireId, rack);
+        Tire tire = new Tire(tireId, rack, tireInfo);
         content.add(holeIndex, new Hole(hole.getWidth() - tire.getWidth(), rack));
         content.add(holeIndex, tire);
         return tire;
