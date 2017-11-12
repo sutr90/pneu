@@ -16,7 +16,8 @@ public class Tire implements Slot {
 
     @Override
     public int getWidth() {
-        return 300;
+        String width = tireInfo.size.split("/")[0].trim();
+        return Integer.parseInt(width) * (Integer.parseInt(tireInfo.count) / 2);
     }
 
     @Override
