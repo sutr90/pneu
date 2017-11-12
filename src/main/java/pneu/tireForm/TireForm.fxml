@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.controlsfx.control.SegmentedButton?>
 
-<AnchorPane prefHeight="400.0" maxWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.tireForm.TireFormController">
-    <GridPane minWidth="100.0" maxWidth="600" vgap="7" AnchorPane.topAnchor="7">
+<AnchorPane maxWidth="500.0" prefHeight="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.tireForm.TireFormController">
+    <GridPane maxWidth="600" minWidth="100.0" vgap="7" AnchorPane.topAnchor="7">
         <columnConstraints>
             <ColumnConstraints fx:id="colOne" hgrow="NEVER" minWidth="80.0" />
-            <ColumnConstraints hgrow="NEVER" minWidth="10.0"  />
-            <ColumnConstraints fx:id="colTwo" hgrow="NEVER" minWidth="80.0"/>
+            <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+            <ColumnConstraints fx:id="colTwo" hgrow="NEVER" minWidth="80.0" />
             <ColumnConstraints hgrow="NEVER" minWidth="90" />
             <ColumnConstraints hgrow="NEVER" minWidth="30" />
             <ColumnConstraints hgrow="NEVER" minWidth="90" />
@@ -72,15 +72,15 @@
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Button mnemonicParsing="false" text="Smlouva" maxWidth="99999" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" text="Vrátit" maxWidth="99999" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <DatePicker GridPane.columnIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button fx:id="contractButton" maxWidth="99999" mnemonicParsing="false" text="Smlouva" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button fx:id="returnButton" maxWidth="99999" mnemonicParsing="false" text="Vrátit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <DatePicker fx:id="dateFrom" GridPane.columnIndex="1" />
+            <DatePicker fx:id="dateTo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="surname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="street" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="city" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="licensePlate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
             <Label alignment="CENTER_RIGHT" minWidth="${colTwo.minWidth}" text="Výrobce" GridPane.columnIndex="2">
                 <padding>
@@ -139,7 +139,7 @@
             </Label>
 
 
-            <ComboBox minWidth="10" maxWidth="9999999" GridPane.columnIndex="3" GridPane.columnSpan="3" />
+            <ComboBox maxWidth="9999999" minWidth="10" GridPane.columnIndex="3" GridPane.columnSpan="3" />
 
             <SegmentedButton fx:id="rimSegButton" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1">
                 <buttons>
@@ -156,16 +156,16 @@
                     <ToggleButton mnemonicParsing="false" prefWidth="${rimSegButton.width / 3}" text="Uni" />
                 </buttons>
             </SegmentedButton>
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="5" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="5" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" maxWidth="99999" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" maxWidth="99999" text="Storno" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <TextField fx:id="size" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <TextField fx:id="radius" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <TextField fx:id="count" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <TextField fx:id="frontLeft" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <TextField fx:id="frontRight" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <TextField fx:id="rearLeft" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <TextField fx:id="rearRight" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+            <TextField fx:id="price" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Button fx:id="okButton" maxWidth="99999" mnemonicParsing="false" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Button fx:id="cancelButton" maxWidth="99999" mnemonicParsing="false" text="Storno" GridPane.columnIndex="5" GridPane.rowIndex="8" />
 
 
         </children>
