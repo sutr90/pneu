@@ -13,18 +13,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.controlsfx.control.SegmentedButton?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.tireForm.TireFormController">
-    <GridPane layoutX="14.0" layoutY="14.0" prefWidth="400.0" gridLinesVisible="true">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pneu.tireForm.TireFormController">
+    <GridPane prefWidth="500.0">
         <columnConstraints>
-            <ColumnConstraints fx:id="colOne" hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="${colOne.prefWidth}" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints fx:id="colOne" hgrow="NEVER" minWidth="60.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="NEVER" minWidth="140.0" />
+            <ColumnConstraints fx:id="colTwo" hgrow="NEVER" minWidth="80.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="NEVER" minWidth="90" prefWidth="90" />
+            <ColumnConstraints hgrow="NEVER" minWidth="30" prefWidth="30" />
+            <ColumnConstraints hgrow="NEVER" minWidth="90" prefWidth="90" />
+         <ColumnConstraints />
+         <ColumnConstraints />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -39,25 +38,39 @@
         </rowConstraints>
         <children>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Od">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Do" GridPane.rowIndex="1">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Jméno" GridPane.rowIndex="2">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Příjmení" GridPane.rowIndex="3">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Ulice" GridPane.rowIndex="4">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Město" GridPane.rowIndex="5">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="SPZ" GridPane.rowIndex="6">
-                <padding><Insets right="5" /></padding>
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="7" />
@@ -69,64 +82,85 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Výrobce" GridPane.columnIndex="2">
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Výrobce" GridPane.columnIndex="2">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Disk" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Disk" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Typ pneu" GridPane.columnIndex="2" GridPane.rowIndex="2" >
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Typ pneu" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Rozměry" GridPane.columnIndex="2" GridPane.rowIndex="3" >
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Rozměry" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Počet" GridPane.columnIndex="2" GridPane.rowIndex="4" >
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Počet" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="LP" GridPane.columnIndex="2" GridPane.rowIndex="5" >
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="LP" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="LZ" GridPane.columnIndex="2" GridPane.rowIndex="6" >
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="30.0" text="PP" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefWidth="${colOne.prefWidth}" text="Cena" GridPane.columnIndex="2" GridPane.rowIndex="7" >
-                <padding><Insets right="5" /></padding>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="LZ" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                <padding>
+                    <Insets right="5" />
+                </padding>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefWidth="30.0" text="PZ" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                <padding>
+                    <Insets right="5" />
+                </padding>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefWidth="${colTwo.prefWidth}" text="Cena" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                <padding>
+                    <Insets right="5" />
+                </padding>
             </Label>
 
 
-            <ComboBox minWidth="200" GridPane.columnIndex="3" GridPane.columnSpan="6" />
+            <ComboBox minWidth="210" prefWidth="210" GridPane.columnIndex="3" />
 
-            <SegmentedButton fx:id="rimSegButton" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1">
+            <SegmentedButton fx:id="rimSegButton" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1">
                 <buttons>
-                    <ToggleButton mnemonicParsing="false" prefWidth="${rimSegButton.width / 3}" text="Ocel" />
-                    <ToggleButton mnemonicParsing="false" prefWidth="${rimSegButton.width / 3}" text="Hliník" />
-                    <ToggleButton mnemonicParsing="false" prefWidth="${rimSegButton.width / 3}" text="Není" />
+                    <ToggleButton mnemonicParsing="false" prefWidth="70" text="Ocel" />
+                    <ToggleButton mnemonicParsing="false" prefWidth="70" text="Hliník" />
+                    <ToggleButton mnemonicParsing="false" prefWidth="70" text="Není" />
                 </buttons>
             </SegmentedButton>
 
-            <SegmentedButton fx:id="tireSegButton" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="2">
+            <SegmentedButton fx:id="tireSegButton" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2">
                 <buttons>
-                    <ToggleButton mnemonicParsing="false" prefWidth="${tireSegButton.width / 3}" text="Letní" />
-                    <ToggleButton mnemonicParsing="false" prefWidth="${tireSegButton.width / 3}" text="Zimní" />
-                    <ToggleButton mnemonicParsing="false" prefWidth="${tireSegButton.width / 3}" text="Univerzální" />
+                    <ToggleButton mnemonicParsing="false" prefWidth="70" text="Letní" />
+                    <ToggleButton mnemonicParsing="false" prefWidth="70" text="Zimní" />
+                    <ToggleButton mnemonicParsing="false" prefWidth="70" text="Uni" />
                 </buttons>
             </SegmentedButton>
-
-
-            <ComboBox GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <ComboBox GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <ComboBox GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-            <Label text="PP" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-            <Label text="PZ" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="6" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+         <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+         <TextField GridPane.columnIndex="5" GridPane.rowIndex="3" />
+         <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
+         <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
+         <TextField GridPane.columnIndex="5" GridPane.rowIndex="5" />
+         <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
+         <TextField GridPane.columnIndex="5" GridPane.rowIndex="6" />
+         <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
+         <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+         <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="8" />
 
         </children>
     </GridPane>
