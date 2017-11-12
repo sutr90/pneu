@@ -72,8 +72,8 @@
                     <Insets right="5" />
                 </padding>
             </Label>
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button mnemonicParsing="false" text="Smlouva" maxWidth="99999" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button mnemonicParsing="false" text="Vrátit" maxWidth="99999" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <DatePicker GridPane.columnIndex="1" />
             <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -164,8 +164,8 @@
             <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
             <TextField GridPane.columnIndex="5" GridPane.rowIndex="6" />
             <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <Button mnemonicParsing="false" maxWidth="99999" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Button mnemonicParsing="false" maxWidth="99999" text="Storno" GridPane.columnIndex="5" GridPane.rowIndex="8" />
 
 
         </children>
