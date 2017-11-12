@@ -3,6 +3,8 @@ package pneu.main;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,6 +42,11 @@ public class MainController {
     public void showDialog() {
         TireFormView tfv = new TireFormView();
         Stage tireForm = new Stage();
+        tireForm.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (KeyCode.ESCAPE == event.getCode()) {
+                tireForm.close();
+            }
+        });
         Scene scene = new Scene(tfv.getView());
         scene.getStylesheets().add(getClass().getResource("../app.css").toExternalForm());
         tireForm.setScene(scene);
