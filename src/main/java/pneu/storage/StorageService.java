@@ -1,11 +1,14 @@
 package pneu.storage;
 
+import com.google.gson.Gson;
 import pneu.rack.Rack;
 import pneu.slot.Hole;
 import pneu.slot.Slot;
 import pneu.slot.Tire;
 import pneu.vo.TireVO;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -128,5 +131,16 @@ public class StorageService {
 
     public Set<String> getManufacturers() {
         return storage.getManufacturers();
+    }
+
+    public void saveData() {
+        Gson gson = new Gson();
+        String json = gson.toJson(storage);
+
+        try (PrintWriter out = new PrintWriter("D:\\tmp\\pneuSave.json")) {
+            out.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

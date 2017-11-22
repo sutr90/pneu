@@ -1,5 +1,6 @@
 package pneu.main;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,6 +54,10 @@ public class MainController {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onShowTireFormEvent(ShowTireFormEvent e){
         showDialog();
+    }
+
+    public void saveData(ActionEvent actionEvent) {
+        storageService.saveData();
     }
 }
 

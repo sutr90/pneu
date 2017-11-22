@@ -4,7 +4,7 @@ import pneu.rack.Rack;
 
 public class Hole implements Slot {
     private final int width;
-    private final Rack rack;
+    private transient final Rack rack;
 
     public Hole(int width, Rack rack) {
         this.width = width;

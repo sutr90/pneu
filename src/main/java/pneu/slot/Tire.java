@@ -5,7 +5,7 @@ import pneu.vo.TireVO;
 
 public class Tire implements Slot {
     private final int id;
-    private final Rack rack;
+    private transient final Rack rack;
     private final TireVO tireInfo;
 
     public Tire(int id, Rack rack, TireVO tireInfo) {
