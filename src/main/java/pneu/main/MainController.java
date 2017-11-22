@@ -59,5 +59,9 @@ public class MainController {
     public void saveData(ActionEvent actionEvent) {
         storageService.saveData();
     }
+
+    public void loadData(ActionEvent actionEvent) {
+        storageService.loadData();
+    }
 }
 

@@ -1,14 +1,18 @@
 package pneu.storage;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import pneu.rack.Rack;
 import pneu.slot.Hole;
 import pneu.slot.Slot;
 import pneu.slot.Tire;
 import pneu.vo.TireVO;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -134,11 +138,27 @@ public class StorageService {
     }
 
     public void saveData() {
-        Gson gson = new Gson();
-        String json = gson.toJson(storage);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        try {
+            objectMapper.writeValue(new File("D:\\tmp\\pneuSave.json"), storage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        try (PrintWriter out = new PrintWriter("D:\\tmp\\pneuSave.json")) {
-            out.write(json);
+    public void loadData() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+        try {
+            byte[] bytes = Files.readAllBytes(Paths.get("D:\\tmp\\pneuSave.json"));
+            String json = new String(bytes, "UTF-8");
+            Storage store = objectMapper.readValue(json, Storage.class);
+
+            store.getRacks();
         } catch (IOException e) {
             e.printStackTrace();
         }

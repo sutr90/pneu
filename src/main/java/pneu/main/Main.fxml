@@ -11,7 +11,8 @@
         <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
         <Pane fx:id="menuBar" prefHeight="50.0" prefWidth="800.0">
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#showDialog" text="Button" />
-         <Button layoutX="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" onAction="#saveData"/>
+         <Button layoutX="83.0" mnemonicParsing="false" onAction="#saveData" text="Save" />
+         <Button layoutX="183.0"  mnemonicParsing="false" text="Load"  onAction="#loadData" />
         </Pane>
         <Pane fx:id="mainPanel" prefHeight="200.0" prefWidth="600.0" />
     </VBox>
